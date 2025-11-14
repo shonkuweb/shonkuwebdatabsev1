@@ -7,66 +7,108 @@
   <style>
     * { box-sizing: border-box; }
     body {
-      font-family: "Poppins", sans-serif;
+      font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
       margin: 0;
       padding: 0;
-      background: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: rgb(0, 0, 0);
+      color: rgb(234, 234, 234);
       min-height: 100vh;
     }
 
     header {
-      background: #111;
-      color: #fff;
-      padding: 15px 25px;
+      background: rgba(0, 0, 0, 0);
+      color: rgb(255, 255, 255);
+      padding: 20px 25px;
       text-align: center;
       font-size: 1.5em;
       font-weight: 600;
       width: 100%;
-      box-shadow: 0 2px 8px rgba(255,255,255,0.1);
       position: sticky;
       top: 0;
       z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+
+    .main-container {
+      width: 95%;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+
+    .section-header {
+      margin-bottom: 30px;
+    }
+
+    .section-header h2 {
+      color: rgb(255, 255, 255);
+      font-size: 2em;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+    }
+
+    .section-header p {
+      color: rgb(234, 234, 234);
+      font-size: 1.1em;
+      margin: 0;
+      opacity: 0.9;
     }
 
     .form-container {
-      width: 95%;
-      max-width: 900px;
-      background: #111;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
-      margin: 25px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 30px;
+      margin-bottom: 40px;
     }
 
     form {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       width: 100%;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field label {
+      color: rgb(255, 255, 255);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .form-field.full-width {
+      grid-column: 1 / -1;
     }
 
     input, select, textarea {
       width: 100%;
       padding: 12px;
       border-radius: 8px;
-      border: 1px solid #555;
-      background: #000;
-      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgb(234, 234, 234);
       font-size: 15px;
       transition: 0.3s ease;
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
       outline: none;
-      box-shadow: 0 0 6px rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(234, 234, 234, 0.5);
     }
 
     textarea {
@@ -74,38 +116,38 @@
     }
 
     button {
-      grid-column: span 2;
       padding: 14px 20px;
-      background: white;
-      color: black;
-      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgb(255, 255, 255);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
       font-weight: 600;
       transition: 0.3s ease;
+      align-self: flex-start;
     }
 
     button:hover {
-      background: #ddd;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .search-box {
-      width: 95%;
-      max-width: 1200px;
-      margin: 10px auto;
+      width: 100%;
+      margin: 30px 0;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
     }
 
     .search-box input {
       padding: 10px;
       border-radius: 6px;
-      border: 1px solid #555;
-      background: #000;
-      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgb(234, 234, 234);
       width: 250px;
       flex-grow: 1;
     }
@@ -113,23 +155,24 @@
     .export-btn {
       padding: 10px 20px;
       border-radius: 6px;
-      background: white;
-      color: black;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgb(255, 255, 255);
       font-weight: 600;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       transition: 0.3s ease;
     }
     .export-btn:hover {
-      background: #ddd;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .table-container {
       width: 95%;
       max-width: 1200px;
-      background: #111;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,255,255,0.1);
       overflow-x: auto;
       margin-bottom: 40px;
     }
@@ -142,7 +185,7 @@
 
     th, td {
       padding: 10px;
-      border: 1px solid #444;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       text-align: left;
       font-size: 14px;
       white-space: normal;
@@ -150,46 +193,57 @@
     }
 
     th {
-      background: #222;
-      color: white;
+      background: rgba(255, 255, 255, 0.05);
+      color: rgb(255, 255, 255);
       position: sticky;
       top: 0;
       z-index: 5;
+      font-weight: 600;
     }
 
-    tr:nth-child(even) { background: #111; }
-    tr:nth-child(odd) { background: #000; }
+    tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+    tr:nth-child(odd) { background: rgba(255, 255, 255, 0.01); }
 
-    td button {
+    td button, .delete-btn {
       padding: 6px 12px;
-      background: #ff4444;
-      color: white;
-      border: none;
+      background: rgba(255, 68, 68, 0.2);
+      color: rgb(255, 255, 255);
+      border: 1px solid rgba(255, 68, 68, 0.4);
       border-radius: 4px;
       cursor: pointer;
       font-size: 13px;
+      transition: 0.3s ease;
+      font-family: inherit;
     }
 
-    td button:hover {
-      background: #cc0000;
+    td button:hover, .delete-btn:hover {
+      background: rgba(255, 68, 68, 0.3);
+      border-color: rgba(255, 68, 68, 0.6);
     }
 
     .editable-input {
       width: 100%;
-      background: #000;
-      color: #fff;
-      border: 1px solid #555;
+      background: rgba(255, 255, 255, 0.03);
+      color: rgb(234, 234, 234);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 6px;
       padding: 6px;
       font-size: 13px;
+      transition: 0.3s ease;
+    }
+
+    .editable-input:focus {
+      border-color: rgba(255, 255, 255, 0.2);
+      outline: none;
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .editable-textarea {
       width: 100%;
       min-height: 60px;
-      background: #000;
-      color: #fff;
-      border: 1px solid #555;
+      background: rgba(255, 255, 255, 0.03);
+      color: rgb(234, 234, 234);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 6px;
       padding: 6px;
       font-size: 13px;
@@ -197,18 +251,22 @@
       line-height: 1.4;
       white-space: pre-wrap;
       word-wrap: break-word;
+      transition: 0.3s ease;
+    }
+
+    .editable-textarea:focus {
+      border-color: rgba(255, 255, 255, 0.2);
+      outline: none;
+      background: rgba(255, 255, 255, 0.05);
     }
 
     @media (max-width: 768px) {
-      form {
+      .form-row {
         grid-template-columns: 1fr;
-      }
-      button {
-        grid-column: span 1;
       }
       .search-box {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
       }
       .search-box input, .export-btn {
         width: 100%;
@@ -219,6 +277,14 @@
       button {
         font-size: 17px;
         padding: 14px;
+        width: 100%;
+      }
+      .section-header h2 {
+        font-size: 1.5em;
+      }
+      .main-container {
+        width: 98%;
+        margin: 20px auto;
       }
     }
   </style>
@@ -226,36 +292,113 @@
 <body>
   <header>ShonkuWeb Database V1</header>
 
-  <div class="form-container">
-    <form id="leadForm">
-      <input type="text" id="businessName" placeholder="Business Name" required />
-      <input type="text" id="industryType" placeholder="Industry Type" required />
-      <textarea id="businessDesc" placeholder="Business Description"></textarea>
-      <input type="text" id="products" placeholder="Products / Services" />
-      <input type="text" id="location" placeholder="City" />
-      <input type="text" id="state" placeholder="State" />
-      <input type="url" id="website" placeholder="Website URL (if any)" />
-      <select id="hasWebsite">
-        <option value="">Existing Website?</option>
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-      <input type="number" id="websiteQuality" placeholder="Website Quality (1-10)" min="1" max="10" />
-      <input type="text" id="socialMedia" placeholder="Social Media Links" />
-      <input type="text" id="contactNumber" placeholder="Contact Number" required />
-      <input type="email" id="email" placeholder="Email Address" />
-      <input type="text" id="needType" placeholder="Need Type (e.g. E-commerce, Portfolio)" />
-      <input type="text" id="leadSource" placeholder="Lead Source (Google, Reference...)" />
-      <button type="submit">➕ Add Business</button>
-    </form>
-  </div>
+  <div class="main-container">
+    <div class="section-header">
+      <h2>Add Business Lead</h2>
+      <p>Enter business information to add a new lead to the database.</p>
+    </div>
 
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔍 Search business..." />
-    <button class="export-btn" id="exportBtn">Download Database</button>
-  </div>
+    <div class="form-container">
+      <form id="leadForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="businessName">Business Name</label>
+            <input type="text" id="businessName" placeholder="Your business or company name" required />
+          </div>
+          <div class="form-field">
+            <label for="industryType">Industry Type</label>
+            <input type="text" id="industryType" placeholder="Industry category" required />
+          </div>
+        </div>
 
-  <div class="table-container">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="contactNumber">Contact Number</label>
+            <input type="text" id="contactNumber" placeholder="10-digit mobile number" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@company.com" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="location">City</label>
+            <input type="text" id="location" placeholder="City" />
+          </div>
+          <div class="form-field">
+            <label for="state">State</label>
+            <input type="text" id="state" placeholder="State" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="website">Website URL</label>
+            <input type="url" id="website" placeholder="Website URL (if any)" />
+          </div>
+          <div class="form-field">
+            <label for="hasWebsite">Existing Website?</label>
+            <select id="hasWebsite">
+              <option value="">-- Select --</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="websiteQuality">Website Quality (1-10)</label>
+            <input type="number" id="websiteQuality" placeholder="Rate from 1 to 10" min="1" max="10" />
+          </div>
+          <div class="form-field">
+            <label for="products">Products / Services</label>
+            <input type="text" id="products" placeholder="Products or services offered" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="socialMedia">Social Media Links</label>
+            <input type="text" id="socialMedia" placeholder="Social media profiles" />
+          </div>
+          <div class="form-field">
+            <label for="leadSource">Lead Source</label>
+            <input type="text" id="leadSource" placeholder="Google, Reference, etc." />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="needType">Need Type</label>
+            <input type="text" id="needType" placeholder="E-commerce, Portfolio, etc." />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field full-width">
+            <label for="businessDesc">Business Description</label>
+            <textarea id="businessDesc" placeholder="Brief description of the business" rows="4"></textarea>
+          </div>
+        </div>
+
+        <button type="submit">➕ Add Business</button>
+      </form>
+    </div>
+
+    <div class="section-header">
+      <h2>Business Leads Database</h2>
+      <p>Search and manage your business leads database.</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 Search business..." />
+      <button class="export-btn" id="exportBtn">Download Database</button>
+    </div>
+
+    <div class="table-container">
     <table id="dataTable">
       <thead>
         <tr>
@@ -281,6 +424,7 @@
       </thead>
       <tbody></tbody>
     </table>
+  </div>
   </div>
 
   <script type="module">
@@ -359,11 +503,15 @@
           </td>
           <td>
             <textarea class="editable-textarea" 
-              oninput="updateRemarks('${lead.id}', this.value)" 
-              placeholder="Add remarks...">${lead.remarks || ""}</textarea>
+              onblur="updateRemarks('${lead.id}', this.value)" 
+              placeholder="Add remarks..."></textarea>
           </td>
-          <td><button onclick="deleteLead('${lead.id}')">Delete</button></td>
+          <td><button class="delete-btn" data-id="${lead.id}">Delete</button></td>
         `;
+        const textarea = row.querySelector('textarea.editable-textarea');
+        if (textarea) {
+          textarea.value = lead.remarks || "";
+        }
         tableBody.appendChild(row);
       });
     }
@@ -391,6 +539,16 @@
       };
       await addDoc(leadsRef, lead);
       form.reset();
+    });
+
+    // Event delegation for delete buttons
+    tableBody.addEventListener("click", async (e) => {
+      if (e.target.classList.contains("delete-btn")) {
+        const id = e.target.getAttribute("data-id");
+        if (id && confirm("Are you sure you want to delete this entry?")) {
+          await deleteDoc(doc(db, "leads", id));
+        }
+      }
     });
 
     window.deleteLead = async function(id) {
